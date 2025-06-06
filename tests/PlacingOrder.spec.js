@@ -1,4 +1,5 @@
 const {test, expect} = require('@playwright/test');
+const { text } = require('stream/consumers');
 
 test.only('Page playwright Script',async({browser, page})=>
 {
@@ -27,4 +28,29 @@ test.only('Page playwright Script',async({browser, page})=>
     await page.locator("div li").first().waitFor();
     const bool = await page.locator("h3:has-text('ZARA COAT 3')").isVisible();
     expect(bool).toBeTruthy();
+
+    //Checkout
+    await page.locator("text=Checkout").click();
+
+    //Checkout page
+    await page.locator("div.title:has-text('CVV Code') + input.input.txt").fill("123");
+    await page.locator("div.title:has-text('Name on Card') + input.input.txt").fill("Jayasurya S");
+
+    //Location selection
+    await page.locator("input[placeholder$='Select Country']").pressSequentially("ind");
+    const dropdowns = page.locator(".ta-results");
+    await dropdowns.waitFor();
+
+    const optionsinDropdown = await dropdowns.locator("button").count();
+    for(let i=0; i<optionsinDropdown;++i)
+    {
+        const text = await dropdowns.locator("button").nth(i).textContent();
+        if (text.trim() === "India")
+        {
+            await dropdowns.locator("button").nth(i).click();
+            break;
+        }
+    }
+    await page.pause();
+
 });
