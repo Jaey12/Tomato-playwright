@@ -1,17 +1,18 @@
-const {test, expect} = require('@playwright/test');
+const { test, expect } = require('@playwright/test');
 const { text } = require('stream/consumers');
 
-test.only('Page playwright Script',async({browser, page})=>
+test('Page playwright Script',async({browser, page})=>
 {
     const loginUsername = page.locator("#userEmail")
     const loginPassword = page.locator("#userPassword")
     const loginButton = page.locator("#login")
     const products = page.locator(".card-body")
     const productName = "ZARA COAT 3"
+    const email = "jayasuryasrinivasan3@gmail.com"
 
     //login
     await page.goto("https://rahulshettyacademy.com/client")
-    await loginUsername.fill("jayasuryasrinivasan3@gmail.com");
+    await loginUsername.fill(email);
     await loginPassword.fill("Srime123");
     await loginButton.click();
     await products.first().waitFor();
@@ -51,6 +52,30 @@ test.only('Page playwright Script',async({browser, page})=>
             break;
         }
     }
+
+    const labelText  = page.locator(".user__name  label[type='text']")
+    await expect(labelText).toHaveText(email);
+    await page.locator(".action__submit").click();
+    expect(await page.locator(".hero-primary").first()).toHaveText("Thankyou for the order.");
+    const orderID = await page.locator(".em-spacer-1 .ng-star-inserted").textContent();
+    console.log(orderID);
+    //Orders
+    await page.locator("button[routerlink*='/dashboard/myorders']").click();
+    await page.locator("tbody").waitFor();
+
+    //Picking order id using loop
+    const row = await page.locator("tbody tr")
+    for(let i=0; i<await row.count(); ++i)
+    {
+        const rowOrderID = await row.nth(i).locator("th").textContent();
+        if (orderID.includes(rowOrderID))
+        {
+            await row.nth(i).locator("button").first().click();
+            break
+        }
+    }
+    const orderIDdetails = await page.locator(".col-text.-main").textContent();
+    expect(orderID.includes(orderIDdetails)).toBeTruthy();
     await page.pause();
 
 });
