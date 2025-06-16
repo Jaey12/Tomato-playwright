@@ -1,7 +1,7 @@
 const { test, expect } = require('@playwright/test');
 const { text } = require('stream/consumers');
 
-test.only('Playwright Speacial Locators',async({browser, page})=>
+test('Playwright Speacial Locators',async({browser, page})=>
 {
     await page.goto("https://rahulshettyacademy.com/angularpractice/")
     await page.getByLabel("Check me out if you Love IceCreams!").click();

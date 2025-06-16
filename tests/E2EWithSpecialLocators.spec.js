@@ -1,7 +1,7 @@
 const { test, expect } = require('@playwright/test');
 const { text } = require('stream/consumers');
 
-test.only('Page playwright Script',async({browser, page})=>
+test('Page playwright Script',async({browser, page})=>
 {
     const loginUsername = page.getByPlaceholder("#email@example.com")
     const loginPassword = page.getByPlaceholder("#enter your passsword")
