@@ -1,7 +1,7 @@
 const { test, expect } = require('@playwright/test');
 const { text } = require('stream/consumers');
 
-test.only('Calendar playwright Script',async({browser, page})=>
+test('Calendar playwright Script',async({browser, page})=>
 {
     const Month = "5";
     const Day = "15";
