@@ -1,31 +1,21 @@
-const { test, expect, request } = require('@playwright/test'); 
+const { test, expect } = require('@playwright/test');
+const { text } = require('stream/consumers');
+const{LoginPage}= require('/Users/jayas/Project Playwright/Page Objects/Login')
 
-const loginPayload = {userEmail:"jayasuryasrinivasan3@gmail.com", userPassword:"Srime123!"}
-let token;
-test.beforeAll(async()=>
+test.only('Page playwright Script',async({browser, page})=>
 {
-    const apiContext = await request.newContext();
-    const loginResponse = await apiContext.post("https://rahulshettyacademy.com/api/ecom/auth/login",
-    {
-        data: loginPayload
-    });
-    expect(loginResponse.ok()).toBeTruthy();
-    const loginResponseJson = await loginResponse.json();
-    token = loginResponseJson.token;
-    console.log(token);
-});
-
-test('First API Test',async({browser, page})=>
-{
-    page.addInitScript(value =>{
-        window.localStorage.setItem('token', value);
-    }, token );
-    
-    await page.goto("https://rahulshettyacademy.com/client")
     const products = page.locator(".card-body")
     const productName = "ZARA COAT 3"
-    const titles = await page.locator(".card-body b").allTextContents();
-    console.log(titles);
+    const username = "jayasuryasrinivasan3@gmail.com"
+    const password = "Srime123!"
+
+    //login Po
+    const loginpage = new LoginPage(page);
+    loginpage.goto();
+    loginpage.validLogin(username, password);
+   
+    await products.first().waitFor();
+    console.log(await products.allTextContents());
 
     const count = await products.count();
     for (let i = 0; i < count; ++i) {
@@ -63,7 +53,7 @@ test('First API Test',async({browser, page})=>
     }
 
     const labelText  = page.locator(".user__name  label[type='text']")
-    await expect(labelText).toHaveText("jayasuryasrinivasan3@gmail.com");
+    await expect(labelText).toHaveText(username);
     await page.locator(".action__submit").click();
     expect(await page.locator(".hero-primary").first()).toHaveText("Thankyou for the order.");
     const orderID = await page.locator(".em-spacer-1 .ng-star-inserted").textContent();
