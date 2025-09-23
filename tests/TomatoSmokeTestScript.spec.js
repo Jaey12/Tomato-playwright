@@ -1,6 +1,6 @@
 const { test, expect } = require('@playwright/test');
 
-test.only('Tomato WebApp Smoke test script', async ({ page }) => {
+test('Tomato WebApp Smoke test script', async ({ page }) => {
 
   // ======================
   // Test Data
