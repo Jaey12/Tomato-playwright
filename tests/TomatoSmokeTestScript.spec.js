@@ -201,5 +201,45 @@ await LicenseAutopaytoogle.click();
 await LicenseAutopayconfirm.click();
 console.log("Auto pay is on");
 
+// ======================
+// Seats Page
+// ======================
+const SeatsButton = page.getByRole("button", {name: "Seats"});
+const SeatsfirstDropdown = page.locator('.ant-select-selector').nth(0);
+const Seats2ndDropdown = page.locator('.ant-select-selector').nth(1);
+const Seats3ndDropdown = page.locator('.ant-select-selector').nth(2);
+const Searchplaceholder = page.getByPlaceholder('Search Seat');
+
+//Seats table
+const teamHeader = page.getByRole("columnheader", { name: "Team" });
+const licenseHeader = page.getByRole("columnheader", { name: "License" });
+const seatNameHeader = page.getByRole("columnheader", { name: "Seat Name" });
+const lastActivityHeader = page.getByRole("columnheader", { name: "Last Activity" });
+const installedHeader = page.getByRole("columnheader", { name: "Installed" });
+const activeStatusHeader = page.getByRole("columnheader", { name: "Active Status" });
+const actionsHeader = page.getByRole("columnheader", { name: "Actions" });
+
+// ======================
+// Seats table Validate Headers
+// ======================
+const SeatsTableElements = [teamHeader, licenseHeader, seatNameHeader, lastActivityHeader, installedHeader,activeStatusHeader, actionsHeader];
+
+// Loop through each locator
+for (const seatselement of SeatsTableElements) {
+  await expect(seatselement).toBeVisible();
+  const text = await seatselement.textContent();
+  console.log(`✅ Element visible: ${text?.trim()}`);
+}
+await expect(teamHeader).toBeVisible();
+await expect(licenseHeader).toBeVisible();
+await expect(seatNameHeader).toBeVisible();
+await expect(lastActivityHeader).toBeVisible();
+await expect(installedHeader).toBeVisible();
+await expect(activeStatusHeader).toBeVisible();
+await expect(actionsHeader).toBeVisible();
+console.log("✅ All table headers are visible");
+
+await expect(page.getByText("All Accounts")).toBeVisible();
+await page.getByText("All Accounts").click();
 
 });
