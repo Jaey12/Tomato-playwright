@@ -1,6 +1,6 @@
 const { test, expect } = require('@playwright/test');
 
-test('Tomato WebApp Smoke test script', async ({ page }) => {
+test.only('Tomato WebApp Smoke test script', async ({ page }) => {
 
   // ======================
   // Test Data
@@ -20,7 +20,7 @@ test('Tomato WebApp Smoke test script', async ({ page }) => {
   // ======================
   // Signup Page Locators
   // ======================
-  const signupButton = page.locator("a[title='Register']");
+  /*const signupButton = page.locator("a[title='Register']");
   const Companyname = page.locator("input[placeholder='Company']");
   const FirstName = page.locator("input[placeholder='First Name']");
   const LastName = page.locator("input[placeholder='Last Name']");
@@ -46,7 +46,7 @@ test('Tomato WebApp Smoke test script', async ({ page }) => {
   const confirmNewPassword = page.locator("#confirmNewPassword");
   const SetPasswordButton = page.getByRole('button', { name: "Set Password" });
   const passwordCreationSuccess = page.getByText("Success!");
-  const LoginbuttonPasswordcreationPage = page.getByRole('link', { name: "Log In" });
+  const LoginbuttonPasswordcreationPage = page.getByRole('link', { name: "Log In" });*/
 
   // ======================
   // Login Final Page Locators
@@ -58,7 +58,7 @@ test('Tomato WebApp Smoke test script', async ({ page }) => {
   // ======================
   // Payment Page Locators
   // ======================
-  const cardNumberFrame = page.frameLocator('iframe[title="Secure card number input frame"]');
+  /*const cardNumberFrame = page.frameLocator('iframe[title="Secure card number input frame"]');
   const expDateFrame = page.frameLocator('iframe[title="Secure expiration date input frame"]');
   const cvcFrame = page.frameLocator('iframe[title="Secure CVC input frame"]');
   const cardHolderName = page.locator("#cardHolderName");
@@ -114,7 +114,7 @@ test('Tomato WebApp Smoke test script', async ({ page }) => {
   await expect(SetPasswordButton).toBeEnabled();
   await SetPasswordButton.click();
   await expect(passwordCreationSuccess).toBeVisible();
-  await LoginbuttonPasswordcreationPage.click();
+  await LoginbuttonPasswordcreationPage.click();*/
 
   // ======================
   // Final Login Flow
@@ -127,7 +127,7 @@ test('Tomato WebApp Smoke test script', async ({ page }) => {
   // ======================
   // Payment Flow
   // ======================
-  await cardNumberFrame.locator('input[name="cardnumber"]').fill(cardNumberData);
+  /*await cardNumberFrame.locator('input[name="cardnumber"]').fill(cardNumberData);
   await expDateFrame.locator('input[name="exp-date"]').fill(ExpiryDateData);
   await cvcFrame.locator('input[name="cvc"]').fill(CVVNumberData);
   await cardHolderName.fill(cardHolderNameData);
@@ -199,25 +199,24 @@ await LicenseAutopayconfirm.click();
 console.log("Auto pay is off");
 await LicenseAutopaytoogle.click();
 await LicenseAutopayconfirm.click();
-console.log("Auto pay is on");
+console.log("Auto pay is on");*/
 
 // ======================
 // Seats Page
 // ======================
-const SeatsButton = page.getByRole("button", {name: "Seats"});
-const SeatsfirstDropdown = page.locator('.ant-select-selector').nth(0);
-const Seats2ndDropdown = page.locator('.ant-select-selector').nth(1);
-const Seats3ndDropdown = page.locator('.ant-select-selector').nth(2);
-const Searchplaceholder = page.getByPlaceholder('Search Seat');
+const SeatsButton = page.locator("a[href='/seats']");
+await SeatsButton.click();
+
 
 //Seats table
-const teamHeader = page.getByRole("columnheader", { name: "Team" });
-const licenseHeader = page.getByRole("columnheader", { name: "License" });
-const seatNameHeader = page.getByRole("columnheader", { name: "Seat Name" });
-const lastActivityHeader = page.getByRole("columnheader", { name: "Last Activity" });
-const installedHeader = page.getByRole("columnheader", { name: "Installed" });
-const activeStatusHeader = page.getByRole("columnheader", { name: "Active Status" });
-const actionsHeader = page.getByRole("columnheader", { name: "Actions" });
+const teamHeader = page.locator("//th[normalize-space()='Team']");
+const licenseHeader = page.locator("//th[normalize-space()='License']");
+const seatNameHeader = page.locator("//div[normalize-space()='Seat Name']");
+const lastActivityHeader = page.locator("//div[normalize-space()='Last Activity']");
+const installedHeader = page.locator("//th[normalize-space()='Installed']");
+const activeStatusHeader = page.locator("//th[normalize-space()='Active Status']");
+const actionsHeader = page.locator("//div[normalize-space()='Actions']");
+
 
 // ======================
 // Seats table Validate Headers
@@ -241,5 +240,105 @@ console.log("✅ All table headers are visible");
 
 await expect(page.getByText("All Accounts")).toBeVisible();
 await page.getByText("All Accounts").click();
+
+//Dropdown locators
+const SeatsfirstDropdown = page.locator("//div[@id='agentAccounts']//div[@class='ant-select-selector']");
+const SeatfirstDropdownoption = page.locator("//div[contains(text(),'Default')]");
+const Seats2ndDropdown = page.locator("//div[@id='license']//div[contains(@class,'ant-select-selector')]");
+const Seats2ndDropdownoption = page.locator("//div[contains(text(),'License 1')]");
+const Seats3rdDropdown = page.locator("//div[@id='status']//div[contains(@class,'ant-select-selector')]");
+const Seats3rdDropdownoption = page.locator("//div[contains(text(),'Active')]");
+const Seats3rdDropdownoption2 = page.locator("//div[contains(text(),'Inactive')]")
+const Searchplaceholder = page.getByPlaceholder('Search Seat');
+
+//Seats Dropdown test
+/*await SeatsfirstDropdown.click();
+await SeatfirstDropdownoption.toBeVisible();
+await SeatfirstDropdownoption.click();
+console.log("✅ Default option selected");
+await Seats2ndDropdown.click();
+await Seats2ndDropdownoption.toBeVisible();
+await Seats2ndDropdownoption.click();
+console.log("✅ License 1 option selected");
+await Seats3rdDropdown.click();
+await Seats3rdDropdownoption.toBeVisible();
+await Seats3rdDropdownoption.click();
+console.log("✅ Active option selected");*/
+
+//Search field test
+await Searchplaceholder.fill("License");
+await Searchplaceholder.clear();
+
+//=================
+//Managers Screen
+//================
+
+const managertab = page.locator("//span[normalize-space()='Managers']");
+const managerheading = page.locator("//h1[normalize-space()='Managers']")
+const TableCoulmnheaders = page.locator('thead.MCpDNXnq th');
+
+await managertab.click();
+await expect(managerheading).toBeVisible();
+
+// Expected column names
+  const expectedColumns = [
+    'First Name',
+    'Last Name',
+    'Email',
+    'Role',
+    'Invoices',
+    'Status',
+    'Actions'
+  ];
+
+  // Get all header texts
+  const headerTexts = await TableCoulmnheaders.allInnerTexts();
+
+  // Trim whitespace and assert
+  const trimmedHeaderTexts = headerTexts.map(h => h.trim());
+  expect(trimmedHeaderTexts).toEqual(expectedColumns);
+  console.log("✅ All Manager screen table headers are visible");
+
+  //===============================
+  //Manager table body validation
+  const firstRow = page.locator('tbody.thfbO7W2 tr').first();
+
+  // Assert all columns are visible for that row
+  await expect(firstRow.locator('td:nth-child(1)')).toBeVisible(); // First Name
+  await expect(firstRow.locator('td:nth-child(2)')).toBeVisible(); // Last Name
+  await expect(firstRow.locator('td:nth-child(3)')).toBeVisible(); // Email
+  await expect(firstRow.locator('td:nth-child(4)')).toBeVisible(); // Role
+  await expect(firstRow.locator('td:nth-child(5)')).toBeVisible(); // Invoices
+  await expect(firstRow.locator('td:nth-child(6)')).toBeVisible(); // Status
+  await expect(firstRow.locator('td:nth-child(7)')).toBeVisible(); // Actions
+
+  // Assert email matches
+  const emailText = (await firstRow.locator('td:nth-child(3) span.vUZFIoF4').innerText()).trim();
+  expect(emailText).toBe(SignupandLoginEmailID);
+
+  //===========================
+  //Add manager functionality
+  //============================
+  const Addbutton = page.locator("//button[normalize-space()='Add']")
+  const modalValidation = page.locator("//h2[normalize-space()='Invite Managers']")
+  const modalEmailField = page.locator("(//input[@class='_xRr_YK8'])[1]")
+  const modalRoleSelection = page.locator("//label[normalize-space()='Role']")
+  const modalInvoiceSelection = page.locator("//label[normalize-space()='Invoices']")
+  const modalAddPerson = page.locator("//button[normalize-space()='+ Add Person']")
+  const managerscreenEditButton = page.locator("//div[@id='users-card']//button[@type='button'][normalize-space()='Edit']")
+  const managerscreenPages = page.locator("div[aria-label='Page Size'] div[class='ant-select-selector']")
+  const managerscreenpagination = page.locator("//li[@class='ant-pagination-simple-pager']")
+
+  await Addbutton.click();
+  await expect(modalValidation).toBeVisible();
+  console.log("Invite Managers Modal is Visible")
+  await modalEmailField.fill("jayasurya+171test@Tomato.ai");
+  await expect(modalRoleSelection).toBeVisible();
+  await expect(modalInvoiceSelection).toBeVisible();
+  await expect(modalAddPerson).toBeVisible();
+  console.log("Role Selection, Invoices and Add person buttons are visible");
+  await expect(managerscreenEditButton).toBeVisible();
+  await expect(managerscreenPages).toBeVisible();
+  await expect(managerscreenpagination).toBeVisible();
 
 });

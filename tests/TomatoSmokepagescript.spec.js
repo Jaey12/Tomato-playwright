@@ -5,12 +5,13 @@ const { PaymentPage } = require('../pages/PaymentPage');
 const { DashboardPage } = require('../pages/DashboardPage');
 const { licensePage } = require('../pages/LicensePage');
 
-test.only('Tomato WebApp Smoke test', async ({ page }) => {
+test('Tomato WebApp Smoke test', async ({ page }) => {
   const signup = new SignupPage(page);
   const login = new LoginPage(page);
   const payment = new PaymentPage(page);
   const dashboard = new DashboardPage(page);
   const licensePage = new licensePage(page);
+  const seatsPage = new SeatsPage(page);
 
   // Test Data
   const email = "jayasurya+176test@tomato.ai";
@@ -41,4 +42,9 @@ test.only('Tomato WebApp Smoke test', async ({ page }) => {
   await licensePage.validateLicenseElements();
   await licensePage.disableAutoPay();
   await licensePage.enableAutoPay();
+
+  //Seats
+  await seatsPage.navigateToSeats();
+  await seatsPage.validateTableHeaders();
+  await seatsPage.searchSeats("License");
 });
