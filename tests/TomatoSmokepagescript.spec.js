@@ -47,4 +47,15 @@ test('Tomato WebApp Smoke test', async ({ page }) => {
   await seatsPage.navigateToSeats();
   await seatsPage.validateTableHeaders();
   await seatsPage.searchSeats("License");
+
+  //Agent
+const INVITE_EMAIL = 'jayasurya@qaoncloud.com';
+const agent = new AgentPage(page);
+await agent.goto(APP_URL);
+await agent.verifyDropdownsClickable();
+await agent.openMicCheckModal();
+await agent.selectDefaultTeam();
+await agent.sendInvite(INVITE_EMAIL);
+await agent.validateFirstRowHasInvite(INVITE_EMAIL);
+console.log(`✅ Invite for ${INVITE_EMAIL} validated in the first row`);
 });

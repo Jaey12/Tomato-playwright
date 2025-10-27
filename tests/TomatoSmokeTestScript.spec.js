@@ -341,4 +341,105 @@ await expect(managerheading).toBeVisible();
   await expect(managerscreenPages).toBeVisible();
   await expect(managerscreenpagination).toBeVisible();
 
+
+//=================
+//Agent Screen
+//=================
+
+const AgentScreen = page.locator("//h1[normalize-space()='Agents']")
+const AGENT_ACCOUNTS_DROPDOWN = '#agentAccounts .ant-select-selector';
+const AGENT_STATUS_DROPDOWN = '#agentsStatus .ant-select-selector';
+const AGENT_ACCENT_DROPDOWN = '#agentsAccent .ant-select-selector';
+
+await expect(AgentScreen).toBeVisible();
+
+const agentAccounts = page.locator(AGENT_ACCOUNTS_DROPDOWN);
+await expect(agentAccounts).toBeVisible();
+await agentAccounts.click();
+
+// ---------- Agent Status Dropdown ----------
+const agentStatus = page.locator(AGENT_STATUS_DROPDOWN);
+await expect(agentStatus).toBeVisible();
+await agentStatus.click();
+
+// ---------- Agent Accent Dropdown ----------
+const agentAccent = page.locator(AGENT_ACCENT_DROPDOWN);
+await expect(agentAccent).toBeVisible();
+await agentAccent.click();
+
+console.log('✅ All dropdowns are visible and clickable');
+
+
+//Mic Check Invite
+const MicCheckInvite = page.locator("//button[normalize-space()='Mic Check Invite']")
+await MicCheckInvite.click();
+const INVITE_EMAIL = 'jayasurya@qaoncloud.com';   // email used to send invite
+
+// ---------- Locators (consts) ----------
+const MIC_CHECK_INVITE_BTN = 'button:has-text("Mic Check Invite")';
+const INVITE_MODAL = '.ant-modal-content'; // adjust if your modal has a different selector
+const TEAM_DROPDOWN_IN_MODAL = `${INVITE_MODAL} .ant-select-selector`; // team dropdown inside modal
+const TEAM_OPTION_DEFAULT = `.ant-select-item-option[title="Default"]`; // option to choose
+const EMAIL_INPUT_IN_MODAL = `${INVITE_MODAL} input[placeholder*="Email"], ${INVITE_MODAL} input[type="email"]`;
+const SEND_INVITE_BTN = `${INVITE_MODAL} button:has-text("Send Invite")`;
+
+// Users table + first row cells
+const USERS_TABLE_ROWS = '#users-card table tbody tr';
+const FIRST_ROW = `${USERS_TABLE_ROWS}:nth-child(1)`; // CSS nth-child is 1-based
+const FIRST_ROW_TEAM_CELL = `${FIRST_ROW} td:nth-child(1)`;
+const FIRST_ROW_NAME_CELL = `${FIRST_ROW} td:nth-child(2)`;
+const FIRST_ROW_EMAIL_CELL = `${FIRST_ROW} td:nth-child(3)`;
+const FIRST_ROW_STATUS_CELL = `${FIRST_ROW} td:nth-child(5)`; // status is 5th column
+const FIRST_ROW_ACTION_CELL = `${FIRST_ROW} td:nth-child(6)`; // action column (Re-Invite button)
+
+// 2) Click Mic Check Invite button
+const micCheckBtn = page.locator(MIC_CHECK_INVITE_BTN);
+await expect(micCheckBtn).toBeVisible();
+await micCheckBtn.click();
+
+// 3) Wait for invite modal to appear
+const modal = page.locator(INVITE_MODAL);
+await expect(modal).toBeVisible();
+
+// 4) Select "Default" from Team dropdown inside modal
+const teamDropdown = modal.locator(TEAM_DROPDOWN_IN_MODAL).first();
+await expect(teamDropdown).toBeVisible();
+await teamDropdown.click();
+
+// Wait for and click the "Default" option (it may render outside the modal container)
+const defaultOption = page.locator(TEAM_OPTION_DEFAULT);
+await expect(defaultOption).toBeVisible();
+await defaultOption.click();
+
+// 5) Enter the invite email
+const emailInput = modal.locator(EMAIL_INPUT_IN_MODAL).first();
+await expect(emailInput).toBeVisible();
+await emailInput.fill(INVITE_EMAIL);
+
+// 6) Click Send Invite
+const sendBtn = modal.locator(SEND_INVITE_BTN);
+await expect(sendBtn).toBeVisible();
+await sendBtn.click();
+
+// Wait for first row's email cell to contain our invite email
+const firstRowEmail = page.locator(FIRST_ROW_EMAIL_CELL);
+await expect(firstRowEmail).toHaveText(INVITE_EMAIL, { timeout: 10000 });
+
+// 8) Validate other columns in the first row
+const firstRowTeam = page.locator(FIRST_ROW_TEAM_CELL);
+await expect(firstRowTeam).toHaveText('Default');
+
+// Status should contain 'Pending'
+const firstRowStatus = page.locator(FIRST_ROW_STATUS_CELL);
+await expect(firstRowStatus).toContainText('Pending');
+
+// Action cell should contain a "Re-Invite" button
+const reInviteBtn = page.locator(`${FIRST_ROW_ACTION_CELL} button:has-text("Re-Invite")`);
+await expect(reInviteBtn).toBeVisible();
+
+// Optional: log success
+console.log(`✅ Invite for ${INVITE_EMAIL} appears in the first row with status 'Pending'`);
+
+
+
 });
