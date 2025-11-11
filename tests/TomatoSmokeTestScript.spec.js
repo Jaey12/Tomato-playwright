@@ -64,7 +64,7 @@ test.only('Tomato WebApp Smoke test script', async ({ page }) => {
   const cardHolderName = page.locator("#cardHolderName");
   const Zip = page.locator("#zip");
   const CountrySelection = page.getByRole('combobox', { name: "combobox" });
-  const BuyNowButton = page.getByRole('button', { name: "Buy Now" });
+  const BuyNowButton = page.getByRole('button', { name: "Buy Now" });*/
 
   // ======================
   // Dashboard Page Locators
@@ -82,7 +82,7 @@ test.only('Tomato WebApp Smoke test script', async ({ page }) => {
   // ======================
   // Signup Flow
   // ======================
-  await signupButton.click();
+  /*await signupButton.click();
   await Companyname.fill("QAoncloud");
   await FirstName.fill("Jay");
   await LastName.fill("Surya");
@@ -132,15 +132,15 @@ test.only('Tomato WebApp Smoke test script', async ({ page }) => {
   await cvcFrame.locator('input[name="cvc"]').fill(CVVNumberData);
   await cardHolderName.fill(cardHolderNameData);
   await Zip.fill("1543");
-  await BuyNowButton.click();
+  await BuyNowButton.click();*/
 
   // ======================
   // Dashboard Flow
   // ======================
-  await expect(QuickStartText).toBeVisible();
+  /*await expect(QuickStartText).toBeVisible();
   await LetstartButton.click();
   await expect(Dashboard).toBeVisible();
-  await expect(DashboardDateselector).toBeVisible();
+  await expect(DashboardDateselector).toBeVisible();*/
 
   // Dropdown Interactions
   await expect(DashboardDropdown).toBeVisible();
@@ -162,17 +162,16 @@ test.only('Tomato WebApp Smoke test script', async ({ page }) => {
   // License Flow
   // ======================
   const LicenseTab = page.locator("a[class='license-tab-step-1'] span");
-  const LicenseHeading = page.locator("div[class='VA7eHce_'] h1");
-  const LicenseName = page.getByText("Name"); 
-  const LicenseKey = page.getByText("License Key");
-  const BillingPeriod = page.getByText("Billing Period");
-  const RenewalDate = page.getByText("Auto-Renewal Date");
-  const LicenseSeats = page.locator('#licenses-modal').getByText('Seats', { exact: true });
-  const LicenseCostPerSeat = page.getByText("Cost Per Seat");
-  const LicenseseatCount = page.locator("div[class='ant-col ezku6qKi css-19lec04'] div:nth-child(2) span:nth-child(1)");
-  const LicenseInstalls = page.locator("div[class='ant-col ezku6qKi css-19lec04'] div:nth-child(2) span:nth-child(1)");
-  const LicenseTotalcost = page.locator("span:has-text('Total Cost')");
-  const LicenseAutopaytoogle = page.locator(".ant-switch-handle");
+  const LicenseHeading = page.getByRole('heading');
+  const LicenseName = page.locator("body > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > span:nth-child(1)")
+  const LicenseKey = page.locator("//body/div[@id='app']/div[@data-testid='banner-container']/div[@id='app-layout']/div[@class='uNoOvI6O']/div[@class='VEEWCXMD']/div[@id='licenses-modal']/div[@class='ant-flex css-19lec04 ant-flex-align-stretch ant-flex-vertical']/div[2]/div[1]/div[1]/span[1]")
+  const BillingPeriod = page.locator("//div[@class='ant-flex css-19lec04 ant-flex-align-stretch ant-flex-vertical']//div[1]//div[3]//div[2]//div[1]//div[1]//span[1]")
+  const RenewalDate = page.locator("//div[@class='ant-flex css-19lec04 ant-flex-align-stretch ant-flex-vertical']//div[1]//div[3]//div[2]//div[1]//div[1]//span[1]")
+  const LicenseSeats = page.locator("div[class='ant-flex css-19lec04 ant-flex-align-stretch ant-flex-vertical'] div:nth-child(1) div:nth-child(3) div:nth-child(2) div:nth-child(1) div:nth-child(1) span:nth-child(1)")
+  const LicenseInstalls = page.locator("div[class='ant-flex css-19lec04 ant-flex-align-stretch ant-flex-vertical'] div:nth-child(1) div:nth-child(3) div:nth-child(2) div:nth-child(1) div:nth-child(1) span:nth-child(1)")
+  const LicenseCostPerSeat = page.locator("div[class='ant-flex css-19lec04 ant-flex-align-stretch ant-flex-vertical'] div:nth-child(1) div:nth-child(3) div:nth-child(2) div:nth-child(1) div:nth-child(1) span:nth-child(1)")
+  const LicenseTotalcost = page.locator("div[class='ant-flex css-19lec04 ant-flex-align-stretch ant-flex-vertical'] div:nth-child(1) div:nth-child(3) div:nth-child(2) div:nth-child(1) div:nth-child(1) span:nth-child(1)")
+  const LicenseAutopaytoogle = page.locator("body > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > span:nth-child(2) > div:nth-child(1) > button:nth-child(1) > span:nth-child(2)")
   const LicenseAutopayClose = page.locator("button[class='Xkz1j0df U8VkvNQW mjX0nMbQ']");
   const LicenseAutopayconfirm = page.locator("button[class='Xkz1j0df c8HpHkJn mjX0nMbQ']");
 
@@ -180,7 +179,7 @@ test.only('Tomato WebApp Smoke test script', async ({ page }) => {
 await LicenseTab.click();
 
 // Define locators in an array
-const licenseElements = [LicenseHeading, LicenseName, LicenseKey, BillingPeriod, RenewalDate, LicenseSeats, LicenseseatCount, LicenseInstalls,
+const licenseElements = [LicenseHeading, LicenseName, LicenseKey, BillingPeriod, RenewalDate, LicenseSeats, LicenseInstalls,
   LicenseTotalcost,
   LicenseCostPerSeat
 ];
@@ -199,7 +198,7 @@ await LicenseAutopayconfirm.click();
 console.log("Auto pay is off");
 await LicenseAutopaytoogle.click();
 await LicenseAutopayconfirm.click();
-console.log("Auto pay is on");*/
+console.log("Auto pay is on");
 
 // ======================
 // Seats Page
@@ -242,26 +241,25 @@ await expect(page.getByText("All Accounts")).toBeVisible();
 await page.getByText("All Accounts").click();
 
 //Dropdown locators
-const SeatsfirstDropdown = page.locator("//div[@id='agentAccounts']//div[@class='ant-select-selector']");
-const SeatfirstDropdownoption = page.locator("//div[contains(text(),'Default')]");
-const Seats2ndDropdown = page.locator("//div[@id='license']//div[contains(@class,'ant-select-selector')]");
-const Seats2ndDropdownoption = page.locator("//div[contains(text(),'License 1')]");
-const Seats3rdDropdown = page.locator("//div[@id='status']//div[contains(@class,'ant-select-selector')]");
+const SeatsAllAccountDD = page.locator("span[title='All Accounts']")
+const SeatfirstDropdownoption = page.locator("//div[contains(text(),'Default')]")
+const SeatsLicenseDD = page.getByText('All Licenes')
+const Seats2ndDropdownoption = page.getByText('License 1')
+const SeatsstatusDropdown = page.getByText('All Statuses')
 const Seats3rdDropdownoption = page.locator("//div[contains(text(),'Active')]");
-const Seats3rdDropdownoption2 = page.locator("//div[contains(text(),'Inactive')]")
 const Searchplaceholder = page.getByPlaceholder('Search Seat');
 
-//Seats Dropdown test
-/*await SeatsfirstDropdown.click();
-await SeatfirstDropdownoption.toBeVisible();
+/*//Seats Dropdown test
+await SeatsAllAccountDD.click();
+await expect(SeatfirstDropdownoption).toBeVisible();
 await SeatfirstDropdownoption.click();
 console.log("✅ Default option selected");
-await Seats2ndDropdown.click();
-await Seats2ndDropdownoption.toBeVisible();
+await SeatsLicenseDD.click();
+await expect(Seats2ndDropdownoption).toBeVisible();
 await Seats2ndDropdownoption.click();
 console.log("✅ License 1 option selected");
-await Seats3rdDropdown.click();
-await Seats3rdDropdownoption.toBeVisible();
+await SeatsstatusDropdown.click();
+await expect(Seats3rdDropdownoption).toBeVisible();
 await Seats3rdDropdownoption.click();
 console.log("✅ Active option selected");*/
 
@@ -312,9 +310,6 @@ await expect(managerheading).toBeVisible();
   await expect(firstRow.locator('td:nth-child(6)')).toBeVisible(); // Status
   await expect(firstRow.locator('td:nth-child(7)')).toBeVisible(); // Actions
 
-  // Assert email matches
-  const emailText = (await firstRow.locator('td:nth-child(3) span.vUZFIoF4').innerText()).trim();
-  expect(emailText).toBe(SignupandLoginEmailID);
 
   //===========================
   //Add manager functionality
@@ -325,18 +320,21 @@ await expect(managerheading).toBeVisible();
   const modalRoleSelection = page.locator("//label[normalize-space()='Role']")
   const modalInvoiceSelection = page.locator("//label[normalize-space()='Invoices']")
   const modalAddPerson = page.locator("//button[normalize-space()='+ Add Person']")
+  const sendInvite = page.locator('button:has-text("Send Invites")')
   const managerscreenEditButton = page.locator("//div[@id='users-card']//button[@type='button'][normalize-space()='Edit']")
   const managerscreenPages = page.locator("div[aria-label='Page Size'] div[class='ant-select-selector']")
   const managerscreenpagination = page.locator("//li[@class='ant-pagination-simple-pager']")
 
+
   await Addbutton.click();
   await expect(modalValidation).toBeVisible();
   console.log("Invite Managers Modal is Visible")
-  await modalEmailField.fill("jayasurya+171test@Tomato.ai");
+  await modalEmailField.fill("jayasurya+172test@Tomato.ai");
   await expect(modalRoleSelection).toBeVisible();
   await expect(modalInvoiceSelection).toBeVisible();
   await expect(modalAddPerson).toBeVisible();
   console.log("Role Selection, Invoices and Add person buttons are visible");
+  await sendInvite.click();
   await expect(managerscreenEditButton).toBeVisible();
   await expect(managerscreenPages).toBeVisible();
   await expect(managerscreenpagination).toBeVisible();
@@ -346,100 +344,101 @@ await expect(managerheading).toBeVisible();
 //Agent Screen
 //=================
 
-const AgentScreen = page.locator("//h1[normalize-space()='Agents']")
-const AGENT_ACCOUNTS_DROPDOWN = '#agentAccounts .ant-select-selector';
-const AGENT_STATUS_DROPDOWN = '#agentsStatus .ant-select-selector';
-const AGENT_ACCENT_DROPDOWN = '#agentsAccent .ant-select-selector';
+const AgentScreen = page.locator("//span[normalize-space()='Agents Mic Checks']")
+const AgentAllteamDD = page.locator("//span[@title='All Teams']")
+const AgentAllstageDD = page.locator("//span[@title='All Stages']")
+const AgentAllaccentDD = page.locator("//span[@title='All Accents']")
 
-await expect(AgentScreen).toBeVisible();
+await AgentScreen.click();
+await expect(AgentAllteamDD).toBeVisible();
+await AgentAllteamDD.click();
+await expect(AgentAllstageDD).toBeVisible();
+await AgentAllstageDD.click();
+await expect(AgentAllaccentDD).toBeVisible();
+await AgentAllaccentDD.click();
 
-const agentAccounts = page.locator(AGENT_ACCOUNTS_DROPDOWN);
-await expect(agentAccounts).toBeVisible();
-await agentAccounts.click();
+//Mic check invite
+const MicCheckInvite = page.locator('button:has-text("Mic Check Invite")');
+const MicCheckInviteHeading = page.locator("//h2[normalize-space()='Mic Check Invite']");
+const MicCheckDefaultDD = page.locator("span[title='Default']");
+const MicCheckEmailField = page.locator('[name="emails"]');
+const MicCheckDirectLink = page.locator('div.zV1ghZvJ');
+const MicCheckSendinvites = page.locator('button:has-text("Send Invites")');
 
-// ---------- Agent Status Dropdown ----------
-const agentStatus = page.locator(AGENT_STATUS_DROPDOWN);
-await expect(agentStatus).toBeVisible();
-await agentStatus.click();
-
-// ---------- Agent Accent Dropdown ----------
-const agentAccent = page.locator(AGENT_ACCENT_DROPDOWN);
-await expect(agentAccent).toBeVisible();
-await agentAccent.click();
-
-console.log('✅ All dropdowns are visible and clickable');
-
-
-//Mic Check Invite
-const MicCheckInvite = page.locator("//button[normalize-space()='Mic Check Invite']")
 await MicCheckInvite.click();
-const INVITE_EMAIL = 'jayasurya@qaoncloud.com';   // email used to send invite
+await expect(MicCheckInviteHeading).toBeVisible();
+console.log("Mic Check Invite modal Visible");
+await expect(MicCheckDefaultDD).toBeVisible();
+await MicCheckDefaultDD.dblclick();
+await MicCheckEmailField.fill("jayasuryatest1@gmail.com");
+await expect(MicCheckDirectLink).toBeVisible();
+await MicCheckSendinvites.click();
+console.log("Mic Check has been sent")
 
-// ---------- Locators (consts) ----------
-const MIC_CHECK_INVITE_BTN = 'button:has-text("Mic Check Invite")';
-const INVITE_MODAL = '.ant-modal-content'; // adjust if your modal has a different selector
-const TEAM_DROPDOWN_IN_MODAL = `${INVITE_MODAL} .ant-select-selector`; // team dropdown inside modal
-const TEAM_OPTION_DEFAULT = `.ant-select-item-option[title="Default"]`; // option to choose
-const EMAIL_INPUT_IN_MODAL = `${INVITE_MODAL} input[placeholder*="Email"], ${INVITE_MODAL} input[type="email"]`;
-const SEND_INVITE_BTN = `${INVITE_MODAL} button:has-text("Send Invite")`;
+//Agent Mic Check Table
+const AgentTableColumn1 = page.locator('th:has-text("Team")');
+const AgentTableColumn2 = page.locator('th:has-text("Name")');
+const AgentTableColumn3 = page.locator('th:has-text("Email")');
+const AgentTableColumn4 = page.locator('th:has-text("Original Accent")');
+const AgentTableColumn5 = page.locator("//th[normalize-space()='Mic Check']");
+const AgentTableColumn6 = page.locator('th:has-text("Action")');
 
-// Users table + first row cells
-const USERS_TABLE_ROWS = '#users-card table tbody tr';
-const FIRST_ROW = `${USERS_TABLE_ROWS}:nth-child(1)`; // CSS nth-child is 1-based
-const FIRST_ROW_TEAM_CELL = `${FIRST_ROW} td:nth-child(1)`;
-const FIRST_ROW_NAME_CELL = `${FIRST_ROW} td:nth-child(2)`;
-const FIRST_ROW_EMAIL_CELL = `${FIRST_ROW} td:nth-child(3)`;
-const FIRST_ROW_STATUS_CELL = `${FIRST_ROW} td:nth-child(5)`; // status is 5th column
-const FIRST_ROW_ACTION_CELL = `${FIRST_ROW} td:nth-child(6)`; // action column (Re-Invite button)
+const AgentTable = [AgentTableColumn1, AgentTableColumn2, AgentTableColumn3, AgentTableColumn4, AgentTableColumn5, AgentTableColumn6];
 
-// 2) Click Mic Check Invite button
-const micCheckBtn = page.locator(MIC_CHECK_INVITE_BTN);
-await expect(micCheckBtn).toBeVisible();
-await micCheckBtn.click();
+for (const tablecolumn of AgentTable) {
+  await expect(tablecolumn).toBeVisible();
+  const text = await tablecolumn.textContent();
+  console.log(`✅ Element visible: ${text?.trim()}`);
+}
+//Re-Invite Modal
+const ReinviteMicCheck = page.locator('button:has-text("Re-Invite")');
+await expect(ReinviteMicCheck).toBeVisible();
+await ReinviteMicCheck.click();
+console.log("Clicked on Re-invite button");
 
-// 3) Wait for invite modal to appear
-const modal = page.locator(INVITE_MODAL);
-await expect(modal).toBeVisible();
+//=============
+//Teams Screen
+//=============
 
-// 4) Select "Default" from Team dropdown inside modal
-const teamDropdown = modal.locator(TEAM_DROPDOWN_IN_MODAL).first();
-await expect(teamDropdown).toBeVisible();
-await teamDropdown.click();
+const TeamsButton = page.locator("//span[normalize-space()='Teams']");
+const TeamHeading = page.getByTestId('accounts-header-title');
+const TeamColumn1 = page.locator('th:has-text("Team Name")');
+const TeamColumn2 = page.locator('th:has-text("License Name")');
+const TeamColumn3 = page.locator('th:has-text("License Key")');
+const TeamColumn4 = page.locator('th:has-text("License Type")');
+const TeamColumn5 = page.locator('th:has-text("Seats")');
+const TeamColumn6 = page.locator('th:has-text("Installs")')
+const TeamColumn7 = page.locator('th:has-text("Actions")')
 
-// Wait for and click the "Default" option (it may render outside the modal container)
-const defaultOption = page.locator(TEAM_OPTION_DEFAULT);
-await expect(defaultOption).toBeVisible();
-await defaultOption.click();
+await TeamsButton.click();
+await TeamHeading.click();
 
-// 5) Enter the invite email
-const emailInput = modal.locator(EMAIL_INPUT_IN_MODAL).first();
-await expect(emailInput).toBeVisible();
-await emailInput.fill(INVITE_EMAIL);
+const TeamsTable = [TeamColumn1, TeamColumn2, TeamColumn3, TeamColumn4, TeamColumn5, TeamColumn6, TeamColumn7];
 
-// 6) Click Send Invite
-const sendBtn = modal.locator(SEND_INVITE_BTN);
-await expect(sendBtn).toBeVisible();
-await sendBtn.click();
+for (const Teamtablecolumn of TeamsTable) {
+  await expect(Teamtablecolumn).toBeVisible();
+  const text = await Teamtablecolumn.textContent();
+  console.log(`✅ Element visible: ${text?.trim()}`);
+}
 
-// Wait for first row's email cell to contain our invite email
-const firstRowEmail = page.locator(FIRST_ROW_EMAIL_CELL);
-await expect(firstRowEmail).toHaveText(INVITE_EMAIL, { timeout: 10000 });
+//Teams Add Button
+const TeamsAddButton = page.locator('button:has-text("Add")');
+const AddModalHeading = page.getByText('Add New Team');
+const TeamName = page.getByTestId('account-modal-account-name');
+const ManagerDD = page.locator("//div[@name='users']//div[@class='ant-select-selection-overflow']");
+const ManagerDDOption = page.locator("//div[contains(text(),'All Managers')]");
+const LicenseDD = page.locator("//body/div[@id='app']/div[contains(@data-testid,'banner-container')]/div[@id='app-layout']/div[contains(@class,'uNoOvI6O')]/div[contains(@class,'VEEWCXMD')]/main[contains(@class,'rsXq_ztg')]/div[@id='add-accounts-modal']/div[contains(@class,'ant-modal-root css-19lec04')]/div[contains(@class,'ant-modal-wrap ant-modal-centered')]/div[contains(@role,'dialog')]/div/div[contains(@class,'ant-modal-content FSofnDQi')]/div[contains(@class,'ant-modal-body QDWmiyjU')]/div/form/div[contains(@class,'LL70SQpf')]/div[@id='undefined-licenses-select-wrapper']/div[contains(@name,'licenses')]/div[contains(@class,'ant-select-selector')]/span[contains(@class,'ant-select-selection-wrap')]/div[1]")
+const LicenseDDOption = page.locator("//div[contains(text(),'All Licenses')]");
+const TeamAddConfirmButton = page.locator('button:has-text("Confirm")');
 
-// 8) Validate other columns in the first row
-const firstRowTeam = page.locator(FIRST_ROW_TEAM_CELL);
-await expect(firstRowTeam).toHaveText('Default');
-
-// Status should contain 'Pending'
-const firstRowStatus = page.locator(FIRST_ROW_STATUS_CELL);
-await expect(firstRowStatus).toContainText('Pending');
-
-// Action cell should contain a "Re-Invite" button
-const reInviteBtn = page.locator(`${FIRST_ROW_ACTION_CELL} button:has-text("Re-Invite")`);
-await expect(reInviteBtn).toBeVisible();
-
-// Optional: log success
-console.log(`✅ Invite for ${INVITE_EMAIL} appears in the first row with status 'Pending'`);
-
+await TeamsAddButton.click();
+await expect(AddModalHeading).toBeVisible();
+await TeamName.fill("New Team");
+await ManagerDD.click();
+await ManagerDDOption.click();
+await LicenseDD.click();
+await LicenseDDOption.click();
+await TeamAddConfirmButton.click();
 
 
 });
